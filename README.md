@@ -24,12 +24,11 @@ from jax.lib import xla_bridge
 print(xla_bridge.get_backend().platform)
 ```
 
+Make sure the following line is in the `~/.bash_profile`:
 
-## Data
-
-Then, you'll need to download the datasets
-from the [NeRF official Google Drive](https://drive.google.com/drive/folders/128yBriW1IG_3NJ5Rp7APSTZsJqdJdfc1).
-Please download and unzip `nerf_synthetic.zip` and `nerf_llff_data.zip`.
+```bash
+export LD_LIBRARY_PATH=/usr/local/cuda-10.2/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
+```
 
 ### Generate multiscale dataset
 You can generate the multiscale dataset used in the paper by running the following command,
