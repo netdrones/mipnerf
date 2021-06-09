@@ -25,3 +25,7 @@ sudo apt install cuda-10-1 --assume-yes
 gsutil -m cp gs://netdron.es/libcudnn7/* .
 sudo dpkg -i libcudnn7_7.6.4.38-1+cuda10.1_amd64.deb
 sudo dpkg -i libcudnn7-dev_7.6.4.38-1+cuda10.1_amd64.deb
+rm *.deb
+
+# Reboot
+sudo reboot now

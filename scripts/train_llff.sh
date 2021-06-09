@@ -17,8 +17,8 @@
 
 SCENE=trex
 EXPERIMENT=debug
-TRAIN_DIR=/Users/barron/tmp/nerf_results/$EXPERIMENT/$SCENE
-DATA_DIR=/Users/barron/data/nerf_llff_data/$SCENE
+TRAIN_DIR=results/$EXPERIMENT/$SCENE
+DATA_DIR=nerf_data/nerf_llff_data/$SCENE
 
 rm $TRAIN_DIR/*
 python -m train \

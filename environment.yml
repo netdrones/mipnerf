@@ -6,6 +6,7 @@ channels:
 dependencies:
   - python=3.8
   - numpy>=1.16.4,<1.19.0
+  - scipy
   - jax>=0.2.12
   - jaxlib>=0.1.65
   - pip
@@ -16,3 +17,7 @@ dependencies:
     - tensorboard>=2.4.0
     - tensorflow==2.3.1
     - gin-config
+    - jupyterlab
+    - tensorflow-gpu
+    - scikit-image
+    - imageio==2.4.0
