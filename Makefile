@@ -25,7 +25,7 @@ colmap-picnic: download-picnic
 	  --image_path ${PICNIC_DIR}/images
 	colmap exhaustive_matcher \
 	  --database_path ${PICNIC_DIR}/database.db
-	mkdir ${PICNIC_DIR}/sparse
+	if [ ! -d ${PICNIC_DIR}/sparse ]; then mkdir -p ${PICNIC_DIR}/sparse; fi
 	colmap mapper \
 	  --database_path ${PICNIC_DIR}/database.db \
 	  --image_path ${PICNIC_DIR}/images \
