@@ -61,7 +61,7 @@ pip install --upgrade jax jaxlib==0.1.67+cuda101 -f http://storage.googleapis.co
 to
 
 ```bash
-`pip install --upgrade jax jaxlib==0.1.65+cuda101 -f http://storage.googleapis.com/jax-releases/jax_releases.html`.
+pip install --upgrade jax jaxlib==0.1.65+cuda101 -f http://storage.googleapis.com/jax-releases/jax_releases.html
 ```
 
 Test if `jax` is connecting to the GPU once again. If still not, proceed to step 3.
