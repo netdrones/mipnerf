@@ -277,6 +277,7 @@ def main(unused_argv):
         checkpoints.save_checkpoint(
             FLAGS.train_dir, state_to_save, int(step), keep=100)
 
+    '''
     # Test-set evaluation.
     if FLAGS.render_every > 0 and step % FLAGS.render_every == 0:
       # We reuse the same random number generator from the optimization step
@@ -310,6 +311,7 @@ def main(unused_argv):
           summary_writer.image('test_pred_' + k, v, step)
         summary_writer.image('test_pred_acc', pred_acc, step)
         summary_writer.image('test_target', test_case['pixels'], step)
+    '''
 
   if config.max_steps % config.save_every != 0:
     state = jax.device_get(jax.tree_map(lambda x: x[0], state))
