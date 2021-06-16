@@ -1,25 +1,31 @@
-.DEFAULT_GOAL := help
+include include.mk
 
 PICNIC_DIR = picnic_nerf_001
 
-help:
-	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, %%2}'
-
 install:
+	if [ ! -d /usr/local/cuda-10.2 ]; then sh +x bin/install_cuda101.sh; fi
 	conda env update -f environment.yml
-	pip install --upgrade jax jaxlib==0.1.65+cuda101 -f https://storage.googleapis.com/jax-releases/jax_releases.html
+	pip install --upgrade jax jaxlib==0.1.67+cuda101 -f https://storage.googleapis.com/jax-releases/jax_releases.html
 
-train-lego:
+cuda:
+	sh +x bin/install_cuda101.sh
+
+download-lego:
 	if [ ! -d "./nerf-data" ]; then gsutil -m cp -r gs://lucas.netdron.es/nerf-data .; fi
+
+train-lego: download-lego
 	sh +x scripts/train_blender.sh
 
-eval-lego:
+lego: train-lego
 	sh +x scripts/eval_blender.sh
 
 download-picnic:
 	if [ ! -d ${PICNIC_DIR} ]; then gsutil -m cp -r gs://lucas.netdron.es/${PICNIC_DIR} .; fi
 
-colmap-picnic: download-picnic
+downscale-picnic: download-picnic
+	python bin/downscale_images.py
+
+colmap-picnic: downscale-picnic
 	colmap feature_extractor \
 	  --database_path ${PICNIC_DIR}/database.db \
 	  --image_path ${PICNIC_DIR}/images

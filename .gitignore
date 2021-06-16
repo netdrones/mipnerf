@@ -1,0 +1,7 @@
+bin/downscale_images.py
+picnic_nerf_001
+results/
+LLFF/llff/__pycache__/
+LLFF/llff/poses/__pycache__/
+__pycache__/
+internal/__pycache__/
