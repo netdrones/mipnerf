@@ -25,3 +25,18 @@ connect:
 	gcloud compute ssh "$$(gcloud compute instances list --filter="name~'101'" | head -n 1 | awk '{print $$2}')" \
 	  --project netdrones \
 	  --zone us-central1-c
+
+gcp-lite:
+	gcloud beta compute instances create ubuntu-eval-${TIME} \
+	  --project netdrones \
+	  --zone us-central1-c \
+	  --custom-cpu 8 \
+	  --custom-memory 32 \
+	  --accelerator type=nvidia-tesla-v100,count=2 \
+	  --maintenance-policy TERMINATE --restart-on-failure \
+	  --source-machine-image ubuntu-cuda101
+
+connect-lite:
+	gcloud compute ssh "$$(gcloud compute instances list --filter="name~'eval'" | head -n 1 | awk '{print $$2}')" \
+	  --project netdrones \
+	  --zone us-central1-c
