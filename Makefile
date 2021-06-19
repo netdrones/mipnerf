@@ -3,12 +3,12 @@ include include.mk
 PICNIC_DIR = picnic_nerf_001
 
 install:
-	if [ ! -d /usr/local/cuda-10.2 ]; then sh +x bin/install_cuda101.sh; fi
+	if [ ! -d /usr/local/cuda-11.3 ]; then sh +x bin/install_cuda101.sh; fi
 	conda env update -f environment.yml
-	pip install --upgrade jax jaxlib==0.1.67+cuda101 -f https://storage.googleapis.com/jax-releases/jax_releases.html
+	pip install --upgrade jax jaxlib==0.1.65+cuda113 -f https://storage.googleapis.com/jax-releases/jax_releases.html
 
 cuda:
-	sh +x bin/install_cuda101.sh
+	sh +x bin/install_cuda113.sh
 
 download-lego:
 	if [ ! -d "./nerf-data" ]; then gsutil -m cp -r gs://lucas.netdron.es/nerf-data .; fi
