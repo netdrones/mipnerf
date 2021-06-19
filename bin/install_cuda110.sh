@@ -10,7 +10,7 @@ sudo apt-get autoremove
 sudo apt-get autoclean
 sudo rm -rf /usr/local/cuda*
 
-# Install CUDA 11.3
+# Install CUDA 11.0
 
 sudo apt update
 sudo add-apt-repository ppa:graphics-drivers --assume-yes
@@ -19,13 +19,15 @@ sudo bash -c 'echo "deb http://developer.download.nvidia.com/compute/cuda/repos/
 sudo bash -c 'echo "deb http://developer.download.nvidia.com/compute/machine-learning/repos/ubuntu1804/x86_64 /" > /etc/apt/sources.list.d/cuda_learn.list'
 
 sudo apt update
-sudo apt install cuda-11-3 --assume-yes
+sudo apt install cuda-11-0 --assume-yes
 
 # Install cuDNN
-gsutil -m cp gs://lucas.netdron.es/libcudnn8/* .
-sudo dpkg -i libcudnn8_8.2.1.32-1+cuda11.3_amd64.deb
-sudo dpkg -i libcudnn8-dev_8.2.1.32-1+cuda11.3_amd64.deb
-rm *.deb
+gsutil -m cp gs://lucas.netdron.es/cudnn-11.2-linux-x64-v8.1.1.33.tgz .
+tar -xzvf cudnn-11.2-linux-x64-v8.1.1.33.tgz
+sudo cp cuda/include/cudnn*.h /usr/local/cuda/include
+sudo cp -P cuda/lib64/libcudnn* /usr/local/cuda/lib64
+sudo chmod a+r /usr/local/cuda/include/cudnn*.h /usr/local/cuda/lib64/libcudnn*
+rm -r cuda *.tgz
 
 # Install NVIDIA CUDA Toolkit
 sudo apt-get install nvidia-cuda-toolkit --assume-yes

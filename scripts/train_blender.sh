@@ -3,7 +3,7 @@
 SCENE=lego
 EXPERIMENT=debug
 TRAIN_DIR=results/$EXPERIMENT/$SCENE
-DATA_DIR=nerf_data/nerf_synthetic/$SCENE
+DATA_DIR=nerf_synthetic/$SCENE
 
 python -m train \
   --data_dir=$DATA_DIR \

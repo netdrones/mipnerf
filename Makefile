@@ -3,15 +3,17 @@ include include.mk
 PICNIC_DIR = picnic_nerf_001
 
 install:
-	if [ ! -d /usr/local/cuda-11.3 ]; then sh +x bin/install_cuda101.sh; fi
+	if [ ! -d /usr/local/cuda-11.0 ]; then sh +x bin/install_cuda110.sh; fi
 	conda env update -f environment.yml
-	pip install --upgrade jax jaxlib==0.1.65+cuda113 -f https://storage.googleapis.com/jax-releases/jax_releases.html
 
 cuda:
-	sh +x bin/install_cuda113.sh
+	sh +x bin/install_cuda110.sh
 
-download-lego:
-	if [ ! -d "./nerf-data" ]; then gsutil -m cp -r gs://lucas.netdron.es/nerf-data .; fi
+jax:
+	pip install --upgrade jax jaxlib==0.1.65+cuda110 -f https://storage.googleapis.com/jax-releases/jax_releases.html
+
+download-lego: jax
+	if [ ! -d "./nerf_synthetic" ]; then gsutil -m cp -r gs://lucas.netdron.es/nerf_synthetic .; fi
 
 train-lego: download-lego
 	sh +x scripts/train_blender.sh
@@ -19,7 +21,7 @@ train-lego: download-lego
 lego: train-lego
 	sh +x scripts/eval_blender.sh
 
-download-picnic:
+download-picnic: jax
 	if [ ! -d ${PICNIC_DIR} ]; then gsutil -m cp -r gs://lucas.netdron.es/${PICNIC_DIR} .; fi
 
 downscale-picnic: download-picnic
