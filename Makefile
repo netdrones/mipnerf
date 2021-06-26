@@ -18,7 +18,7 @@ download-lego: jax
 train-lego: download-lego
 	sh +x scripts/train_blender.sh
 
-lego: train-lego
+eval-lego:
 	sh +x scripts/eval_blender.sh
 
 download-picnic: jax
